@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Letter to My Younger Self</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --paper: #f5f0e8;
+    --warm-mid: #8b6f4e;
+    --gold: #c9a84c;
+    --rust: #8b3a2a;
+    --cream-deep: #ede6d5;
+    --line: rgba(139, 111, 78, 0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ink);
+    min-height: 100vh;
+    font-family: 'Crimson Pro', Georgia, serif;
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  .outer-wrapper {
+    background: 
+      radial-gradient(ellipse at 20% 0%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(139,58,42,0.06) 0%, transparent 60%),
+      #1a1410;
+    min-height: 100vh;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Decorative top bar */
+  .header-bar {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+  .header-bar .line-ornament { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold)); }
+  .header-bar .line-ornament.rev { background: linear-gradient(to left, transparent, var(--gold)); }
+  .header-bar .diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+
+  /* Title block */
+  .title-block {
+    text-align: center;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+  .title-block .eyebrow {
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .title-block h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    color: var(--paper);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .title-block h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .title-block .subtitle {
+    margin-top: 20px;
+    color: rgba(245, 240, 232, 0.5);
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Paper card */
+  .paper-card {
+    background: var(--paper);
+    width: 100%;
+    max-width: 700px;
+    border-radius: 2px;
+    padding: 56px 60px;
+    position: relative;
+    box-shadow: 
+      0 2px 4px rgba(0,0,0,0.4),
+      0 8px 32px rgba(0,0,0,0.5),
+      0 40px 80px rgba(0,0,0,0.3),
+      inset 0 0 0 1px rgba(201,168,76,0.15);
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  /* Ruled lines background */
+  .paper-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 31px,
+      rgba(139,111,78,0.08) 31px,
+      rgba(139,111,78,0.08) 32px
+    );
+    background-position: 0 68px;
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  /* Red margin line */
+  .paper-card::after {
+    content: '';
+    position: absolute;
+    left: 88px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(139,58,42,0.2);
+    pointer-events: none;
+  }
+
+  /* Section headers */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+    margin-top: 48px;
+    position: relative;
+  }
+  .section-header:first-child { margin-top: 0; }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--rust);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+  .section-rule { flex: 1; height: 1px; background: var(--line); }
+
+  /* Questions */
+  .question-block {
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .question-block label {
+    display: block;
+    font-size: 15.5px;
+    color: #3d2e1e;
+    line-height: 1.55;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .question-block .q-num {
+    font-style: normal;
+    color: var(--warm-mid);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    margin-right: 6px;
+  }
+
+  textarea, input[type="text"] {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(139,111,78,0.3);
+    padding: 8px 0;
+    font-family: 'Crimson Pro', serif;
+    font-size: 16px;
+    color: var(--ink);
+    resize: none;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.65;
+  }
+  textarea { min-height: 80px; }
+  textarea:focus, input:focus {
+    border-bottom-color: var(--gold);
+  }
+  textarea::placeholder, input::placeholder {
+    color: rgba(139,111,78,0.4);
+    font-style: italic;
+  }
+
+  /* Three-word row */
+  .three-words {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .three-words input {
+    text-align: center;
+    font-size: 15px;
+  }
+
+  /* Section divider */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--line), transparent);
+    margin: 48px 0;
+  }
+
+  /* Closing note */
+  .closing-note {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .closing-note p {
+    font-style: italic;
+    color: var(--warm-mid);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Submit button */
+  .submit-area {
+    width: 100%;
+    max-width: 700px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .btn-generate {
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    padding: 16px 56px;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-generate::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0);
+    transition: background 0.2s;
+  }
+  .btn-generate:hover::before { background: rgba(255,255,255,0.15); }
+  .btn-generate:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(201,168,76,0.4); }
+  .btn-generate:active { transform: translateY(0); }
+
+  .btn-clear {
+    background: none;
+    border: 1px solid rgba(245,240,232,0.2);
+    color: rgba(245,240,232,0.4);
+    padding: 10px 28px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-clear:hover { border-color: rgba(245,240,232,0.4); color: rgba(245,240,232,0.6); }
+
+  /* Output letter */
+  .letter-output {
+    display: none;
+    width: 100%;
+    max-width: 700px;
+    margin-top: 48px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+  .letter-output.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .letter-output-inner {
+    background: #faf6ee;
+    padding: 56px 60px;
+    border-radius: 2px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(201,168,76,0.1);
+    position: relative;
+  }
+  .letter-output-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      transparent, transparent 31px,
+      rgba(139,111,78,0.07) 31px, rgba(139,111,78,0.07) 32px
+    );
+    background-position: 0 68px;
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .letter-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .letter-header .letter-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .letter-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .letter-body {
+    font-size: 17px;
+    line-height: 1.85;
+    color: #2a1e12;
+    position: relative;
+  }
+  .letter-body p { margin-bottom: 20px; }
+  .letter-body p:last-child { margin-bottom: 0; }
+
+  .letter-closing {
+    margin-top: 40px;
+    text-align: right;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--warm-mid);
+  }
+
+  .loading-indicator {
+    display: none;
+    text-align: center;
+    padding: 32px;
+    color: rgba(245,240,232,0.5);
+    font-style: italic;
+    font-size: 15px;
+  }
+  .loading-indicator.visible { display: block; }
+
+  /* Copy/print actions */
+  .letter-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 24px;
+  }
+  .btn-action {
+    background: none;
+    border: 1px solid rgba(245,240,232,0.25);
+    color: rgba(245,240,232,0.5);
+    padding: 9px 22px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-action:hover { border-color: var(--gold); color: var(--gold); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .paper-card { padding: 40px 28px; }
+    .paper-card::after { left: 56px; }
+    .letter-output-inner { padding: 40px 28px; }
+    .three-words { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="outer-wrapper">
+
+  <div class="header-bar">
+    <div class="line-ornament"></div>
+    <div class="diamond"></div>
+    <div class="line-ornament rev"></div>
+  </div>
+
+  <div class="title-block">
+    <div class="eyebrow">A writing practice</div>
+    <h1>A Letter to My<br><em>Younger Self</em></h1>
+    <p class="subtitle">Take your time. There are no wrong answers here — only truth you've been carrying.</p>
+  </div>
+
+  <div class="paper-card">
+    <form id="selfLetterForm">
+
+      <!-- SECTION 1 -->
+      <div class="section-header">
+        <span class="section-num">I</span>
+        <span class="section-title">Memory Texture</span>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">1 —</span> How old are you in this memory?</label>
+        <input type="text" name="age" placeholder="e.g. Seven. Maybe eight." />
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">2 —</span> Describe where you are. What do you see, hear, smell?</label>
+        <textarea name="place" placeholder="Take yourself back there…"></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">3 —</span> What were you always doing when no one was watching?</label>
+        <textarea name="joy" placeholder="The thing that was just yours…"></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">4 —</span> Describe that version of yourself in three words.</label>
+        <div class="three-words">
+          <input type="text" name="word1" placeholder="Word one" />
+          <input type="text" name="word2" placeholder="Word two" />
+          <input type="text" name="word3" placeholder="Word three" />
+        </div>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">5 —</span> What did your body feel like when you were most fully yourself?</label>
+        <textarea name="alive" placeholder="Not metaphor — physical. What did it actually feel like to be him?"></textarea>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- SECTION 2 -->
+      <div class="section-header">
+        <span class="section-num">II</span>
+        <span class="section-title">The Shift</span>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">1 —</span> Describe the first moment you remember feeling watched, judged, unsafe, or defined by someone else's eyes.</label>
+        <textarea name="shift_moment" placeholder="Where were you? What happened?"></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">2 —</span> What did you understand in that moment about being a Black boy in this world?</label>
+        <textarea name="understanding" placeholder="What knowledge entered you — welcome or not?"></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">3 —</span> What part of yourself changed after that?</label>
+        <textarea name="what_changed" placeholder="What had to get smaller, harder, quieter?"></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">4 —</span> What did you start doing to survive?</label>
+        <textarea name="survival_start" placeholder="The strategies, the masks, the armor…"></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">5 —</span> What did you stop doing?</label>
+        <textarea name="survival_stop" placeholder="What you had to let go of to get through…"></textarea>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- SECTION 3 -->
+      <div class="section-header">
+        <span class="section-num">III</span>
+        <span class="section-title">The Cost</span>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">1 —</span> What did that younger version of you lose?</label>
+        <textarea name="loss" placeholder="Name it plainly, if you can."></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">2 —</span> What did he misunderstand about himself because of what happened?</label>
+        <textarea name="misunderstanding" placeholder="The lie he came to believe was true…"></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">3 —</span> What shame did he carry that was never his to carry?</label>
+        <textarea name="shame" placeholder="Name the weight. Let it sit here on this page."></textarea>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- SECTION 4 -->
+      <div class="section-header">
+        <span class="section-num">IV</span>
+        <span class="section-title">The Present Voice</span>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">1 —</span> What do you wish someone had told him back then?</label>
+        <textarea name="wish_said" placeholder="The thing that would have changed something…"></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">2 —</span> What strengths did he carry that no one could take from him?</label>
+        <textarea name="strengths" placeholder="What was already rooted in him that survived everything?"></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">3 —</span> What do you most want to honor him for surviving?</label>
+        <textarea name="honor" placeholder="Not just what he survived — but how."></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">4 —</span> If you could put one hand on his shoulder, what would you say?</label>
+        <textarea name="hand_on_shoulder" placeholder="Right now. To him. Not advice — just presence."></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">5 —</span> What do you want him to know you finally understand?</label>
+        <textarea name="finally_understand" placeholder="The thing it took you years to see…"></textarea>
+      </div>
+
+      <div class="question-block">
+        <label><span class="q-num">6 —</span> What promise do you want to make to him now?</label>
+        <textarea name="promise" placeholder="A vow between the you then and the you now."></textarea>
+      </div>
+
+      <div class="closing-note">
+        <p>When you are ready, let these words become a letter.</p>
+      </div>
+
+    </form>
+  </div><!-- .paper-card -->
+
+  <div class="submit-area">
+    <button class="btn-generate" onclick="generateLetter(event)">Generate My Letter</button>
+    <button class="btn-clear" onclick="clearForm(event)">Start Over</button>
+  </div>
+
+  <div class="loading-indicator" id="loadingIndicator">
+    Writing your letter&nbsp;&nbsp;·&nbsp;&nbsp;Give it a moment…
+  </div>
+
+  <div class="letter-output" id="letterOutput">
+    <div class="letter-output-inner">
+      <div class="letter-header">
+        <div class="letter-eyebrow">For you — then and now</div>
+        <h2 id="letterSalutation">Dear Young Me,</h2>
+      </div>
+      <div class="letter-body" id="letterBody"></div>
+      <div class="letter-closing" id="letterClosing"></div>
+    </div>
+    <div class="letter-actions">
+      <button class="btn-action" onclick="copyLetter()">Copy Letter</button>
+      <button class="btn-action" onclick="window.print()">Print</button>
+    </div>
+  </div>
+
+</div><!-- .outer-wrapper -->
+
+<script>
+async function generateLetter(e) {
+  e.preventDefault();
+
+  const form = document.getElementById('selfLetterForm');
+  const data = {
+    age: form.age.value.trim(),
+    place: form.place.value.trim(),
+    joy: form.joy.value.trim(),
+    words: [form.word1.value.trim(), form.word2.value.trim(), form.word3.value.trim()].filter(Boolean).join(', '),
+    alive: form.alive.value.trim(),
+    shift_moment: form.shift_moment.value.trim(),
+    understanding: form.understanding.value.trim(),
+    what_changed: form.what_changed.value.trim(),
+    survival_start: form.survival_start.value.trim(),
+    survival_stop: form.survival_stop.value.trim(),
+    loss: form.loss.value.trim(),
+    misunderstanding: form.misunderstanding.value.trim(),
+    shame: form.shame.value.trim(),
+    wish_said: form.wish_said.value.trim(),
+    strengths: form.strengths.value.trim(),
+    honor: form.honor.value.trim(),
+    hand_on_shoulder: form.hand_on_shoulder.value.trim(),
+    finally_understand: form.finally_understand.value.trim(),
+    promise: form.promise.value.trim()
+  };
+
+  // Check if enough data
+  const filled = Object.values(data).filter(v => v.length > 2).length;
+  if (filled < 3) {
+    alert('Share a little more about yourself before generating the letter.');
+    return;
+  }
+
+  document.getElementById('loadingIndicator').classList.add('visible');
+  const output = document.getElementById('letterOutput');
+  output.classList.remove('visible');
+  output.style.display = 'none';
+
+  const prompt = `You are a compassionate, literary writer helping a Black man write a personal letter to his younger self. Using only the details he has shared below, write a deeply personal, honest letter. Write in first person ("I") as the adult writing to the child. The tone should be warm but unflinching — this is not a pep talk. It is a reckoning. Acknowledge what was lost. Name the burden that was placed on him. Speak to his specific strengths and survival. End with the promise he has named.
+
+Do not invent details not present in the responses. Use their exact words and phrases where powerful. Write 4-6 paragraphs. No headers. No bullet points. Literary prose only.
+
+Here are his responses:
+
+Age in memory: ${data.age || 'not specified'}
+The place: ${data.place || 'not described'}
+What he was always doing when no one was watching: ${data.joy || 'not shared'}
+Three words to describe him then: ${data.words || 'not shared'}
+What his body felt like when most himself: ${data.alive || 'not described'}
+The moment the shift happened: ${data.shift_moment || 'not described'}
+What he understood about being a Black boy: ${data.understanding || 'not shared'}
+What changed after that: ${data.what_changed || 'not shared'}
+What he started doing to survive: ${data.survival_start || 'not shared'}
+What he stopped doing: ${data.survival_stop || 'not shared'}
+What he lost: ${data.loss || 'not named'}
+What he misunderstood about himself: ${data.misunderstanding || 'not shared'}
+The shame he carried that wasn't his: ${data.shame || 'not named'}
+What he wishes someone had told him: ${data.wish_said || 'not shared'}
+His strengths that could not be taken: ${data.strengths || 'not named'}
+What to honor him for surviving: ${data.honor || 'not shared'}
+What to say with one hand on his shoulder: ${data.hand_on_shoulder || 'not shared'}
+What you finally understand: ${data.finally_understand || 'not shared'}
+The promise: ${data.promise || 'not made'}
+
+Begin the letter with "Dear" followed by an age-appropriate name or just the age. End the letter with the promise, then a closing like "With everything I have, [the you who made it]" or something equally fitting to the tone of what was shared.`;
+
+  try {
+    const response = await fetch('/.netlify/functions/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
+    });
+
+    const result = await response.json();
+    const text = result.content.map(b => b.text || '').join('');
+
+    // Parse salutation from first line
+    const lines = text.trim().split('\n');
+    let salutation = '';
+    let bodyLines = lines;
+
+    if (lines[0].startsWith('Dear')) {
+      salutation = lines[0];
+      bodyLines = lines.slice(1);
+    }
+
+    // Parse closing (last paragraph as closing if it's short)
+    const paragraphs = bodyLines.join('\n').split(/\n\n+/).filter(p => p.trim());
+    let closing = '';
+    let bodyParas = paragraphs;
+
+    const lastPara = paragraphs[paragraphs.length - 1];
+    if (lastPara && lastPara.length < 120 && paragraphs.length > 2) {
+      closing = lastPara;
+      bodyParas = paragraphs.slice(0, -1);
+    }
+
+    document.getElementById('letterSalutation').textContent = salutation || 'Dear Young Me,';
+    document.getElementById('letterBody').innerHTML = bodyParas.map(p => `<p>${p.trim()}</p>`).join('');
+    document.getElementById('letterClosing').textContent = closing;
+
+    document.getElementById('loadingIndicator').classList.remove('visible');
+    output.style.display = 'block';
+    setTimeout(() => {
+      output.classList.add('visible');
+      output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+
+    // ── Send responses + generated letter to Formspree ──────────────
+    const letterFull = [salutation, bodyParas.join('\n\n'), closing].filter(Boolean).join('\n\n');
+    const formspreePayload = {
+      ...data,
+      generated_letter: letterFull,
+      submitted_at: new Date().toLocaleString()
+    };
+    fetch('https://formspree.io/f/xwvnrowd', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(formspreePayload)
+    }).catch(err => console.warn('Formspree submission failed silently:', err));
+
+  } catch (err) {
+    document.getElementById('loadingIndicator').classList.remove('visible');
+    alert('Something went wrong generating the letter. Please try again.');
+    console.error(err);
+  }
+}
+
+function clearForm(e) {
+  e.preventDefault();
+  if (confirm('Clear all your responses and start over?')) {
+    document.getElementById('selfLetterForm').reset();
+    const output = document.getElementById('letterOutput');
+    output.classList.remove('visible');
+    output.style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function copyLetter() {
+  const salutation = document.getElementById('letterSalutation').textContent;
+  const body = document.getElementById('letterBody').innerText;
+  const closing = document.getElementById('letterClosing').textContent;
+  const fullText = [salutation, '', body, '', closing].filter(Boolean).join('\n');
+  navigator.clipboard.writeText(fullText).then(() => alert('Letter copied to clipboard.'));
+}
+</script>
+</body>
+</html>
