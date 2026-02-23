@@ -407,6 +407,51 @@
     .letter-output-inner { padding: 40px 28px; }
     .three-words { grid-template-columns: 1fr; }
   }
+
+  /* Grounding note */
+  .grounding-note {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .grounding-note p {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--warm-mid);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .grounding-note p:last-child { margin-bottom: 0; }
+
+  /* Section intro */
+  .section-intro {
+    font-size: 15px;
+    color: #5a4232;
+    line-height: 1.75;
+    margin-bottom: 28px;
+    margin-top: -8px;
+    font-style: italic;
+  }
+
+  /* Privacy note */
+  .privacy-note {
+    font-size: 13px;
+    color: rgba(245,240,232,0.4);
+    font-style: italic;
+    line-height: 1.7;
+    max-width: 420px;
+    text-align: center;
+  }
+
+  /* Final message */
+  .final-message p {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.9;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -420,19 +465,28 @@
 
   <div class="title-block">
     <div class="eyebrow">A writing practice</div>
-    <h1>A Letter to My<br><em>Younger Self</em></h1>
-    <p class="subtitle">Take your time. There are no wrong answers here — only truth you've been carrying.</p>
+    <h1>Letter to<br><em>Younger Me</em></h1>
+    <p class="subtitle">Before the world told you who to be, you were already someone.</p>
+    <p class="subtitle" style="margin-top:12px; font-style:normal; font-size:15px; opacity:0.75;">This is not therapy. This is not performance. This is not about blaming anyone.<br><br>This is about remembering who you were before survival became strategy.<br><br>Take your time. Answer honestly. There are no right words. Only real ones.</p>
   </div>
 
   <div class="paper-card">
     <form id="selfLetterForm">
 
+      <div class="grounding-note">
+        <p>Pause for a moment.</p>
+        <p>Picture yourself at 7. Or 8. Or 10. Before you were calculating. Before you were managing how you were perceived.</p>
+        <p>We are going back there.</p>
+      </div>
+
       <!-- SECTION 1 -->
       <div class="section-header">
         <span class="section-num">I</span>
-        <span class="section-title">Memory Texture</span>
+        <span class="section-title">Before You Adjusted</span>
         <div class="section-rule"></div>
       </div>
+
+      <p class="section-intro">Answer from memory, not from analysis. Don't overthink it. Just remember.</p>
 
       <div class="question-block">
         <label><span class="q-num">1 —</span> How old are you in this memory?</label>
@@ -468,9 +522,11 @@
       <!-- SECTION 2 -->
       <div class="section-header">
         <span class="section-num">II</span>
-        <span class="section-title">The Shift</span>
+        <span class="section-title">When It Changed</span>
         <div class="section-rule"></div>
       </div>
+
+      <p class="section-intro">There was a moment when you realized the world was watching you differently. When you understood you were not just a boy.<br><br>Go back to that moment.<br>Be specific. Even if it's uncomfortable.</p>
 
       <div class="question-block">
         <label><span class="q-num">1 —</span> Describe the first moment you remember feeling watched, judged, unsafe, or defined by someone else's eyes.</label>
@@ -502,9 +558,11 @@
       <!-- SECTION 3 -->
       <div class="section-header">
         <span class="section-num">III</span>
-        <span class="section-title">The Cost</span>
+        <span class="section-title">What It Cost You</span>
         <div class="section-rule"></div>
       </div>
+
+      <p class="section-intro">Adaptation kept you safe. But it wasn't free.<br><br>What did you put down? What did you bury? What did you carry that wasn't yours?<br><br>Name it.</p>
 
       <div class="question-block">
         <label><span class="q-num">1 —</span> What did that younger version of you lose?</label>
@@ -526,9 +584,11 @@
       <!-- SECTION 4 -->
       <div class="section-header">
         <span class="section-num">IV</span>
-        <span class="section-title">The Present Voice</span>
+        <span class="section-title">What You Know Now</span>
         <div class="section-rule"></div>
       </div>
+
+      <p class="section-intro">You survived. You're still here.<br><br>Now speak from who you are today.<br><br>What does that younger version of you need to hear? What was never his fault? What strength did he already have?</p>
 
       <div class="question-block">
         <label><span class="q-num">1 —</span> What do you wish someone had told him back then?</label>
@@ -568,8 +628,9 @@
   </div><!-- .paper-card -->
 
   <div class="submit-area">
-    <button class="btn-generate" onclick="generateLetter(event)">Generate My Letter</button>
+    <button class="btn-generate" onclick="generateLetter(event)">Create My Letter</button>
     <button class="btn-clear" onclick="clearForm(event)">Start Over</button>
+    <p class="privacy-note">This letter is yours. No one else will see it unless you choose to share it.<br>If it moves you, consider who in your life might need to hear a man speak this honestly.</p>
   </div>
 
   <div class="loading-indicator" id="loadingIndicator">
@@ -579,7 +640,7 @@
   <div class="letter-output" id="letterOutput">
     <div class="letter-output-inner">
       <div class="letter-header">
-        <div class="letter-eyebrow">For you — then and now</div>
+        <div class="letter-eyebrow">Your letter</div>
         <h2 id="letterSalutation">Dear Young Me,</h2>
       </div>
       <div class="letter-body" id="letterBody"></div>
@@ -589,6 +650,12 @@
       <button class="btn-action" onclick="copyLetter()">Copy Letter</button>
       <button class="btn-action" onclick="window.print()">Print</button>
     </div>
+  </div>
+
+  <div class="final-message" id="finalMessage" style="display:none; max-width:700px; width:100%; text-align:center; margin-top:40px; opacity:0; transition: opacity 0.8s ease;">
+    <p>You are not trying to become someone new.</p>
+    <p>You are remembering who you were before you started shrinking.</p>
+    <p>Sit with this.<br>Read it slowly.<br><br>And if you share it, do it because it feels right.</p>
   </div>
 
 </div><!-- .outer-wrapper -->
@@ -700,6 +767,9 @@ Begin the letter with "Dear" followed by an age-appropriate name or just the age
     setTimeout(() => {
       output.classList.add('visible');
       output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const finalMsg = document.getElementById('finalMessage');
+      finalMsg.style.display = 'block';
+      setTimeout(() => { finalMsg.style.opacity = '1'; }, 800);
     }, 50);
 
     // ── Send responses + generated letter to Formspree ──────────────
